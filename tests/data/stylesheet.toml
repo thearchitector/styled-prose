@@ -9,4 +9,4 @@ from_google_fonts = true
 [[styles]]
 name = "default"
 font_size = 12
-font_name = "EB Garamond"
+font_name = "Times"

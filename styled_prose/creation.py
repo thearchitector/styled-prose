@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from reportlab.lib.pagesizes import letter
-from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Paragraph, SimpleDocTemplate
+
+from .stylesheet import load_stylesheet
 
 
 def create_pdf(config, file_path, text):
@@ -17,5 +18,5 @@ def create_pdf(config, file_path, text):
 
     text = text.replace("\r", "").replace("\n", "<br />")
 
-    ss = getSampleStyleSheet()
-    document.build([Paragraph(text, ss["Normal"])])
+    ss = load_stylesheet(config)
+    document.build([Paragraph(text, ss["default"])])
