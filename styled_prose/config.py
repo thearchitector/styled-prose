@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 from .exceptions import BadConfigException
 
 try:
-    import tomllib
+    import tomllib  # pyright: ignore
 except ModuleNotFoundError:
     import tomli as tomllib
 

@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Optional
 from urllib.parse import quote_plus
 
-from httpx import Client, Response
+from httpx import Client, HTTPError, Response
 from pydantic import BaseModel, ConfigDict, ValidationError, model_validator
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -106,6 +106,7 @@ def _download_font_family(
         # if the font file manifest doesn't exist, download it
         font_url: str = GOOGLE_FONTS_URL.format(quote_plus(font_family))
         resp: Response = client.get(font_url)
+        resp.raise_for_status()
         body: bytes = resp.read()[5:]  # trim the beginning malformed `)]}'\n`
         manifest = json.loads(body)["manifest"]
 
@@ -134,6 +135,7 @@ def _download_font_family(
             if not file.exists():
                 # if the file doesn't exist, download it
                 file_resp: Response = client.get(files["url"])
+                file_resp.raise_for_status()
                 file.write_bytes(file_resp.read())
 
     return (
@@ -149,8 +151,8 @@ def register_fonts(path: Union[str, PathLike[str]]):
     c_path: Path = Path(path).parent
     client: Optional[Client] = None
 
-    for ff in config.get("fonts", []):
-        try:
+    try:
+        for ff in config.get("fonts", []):
             # for each font family, register the provided fonts
             font_family: FontFamily = FontFamily(**ff)
             normal: Path
@@ -193,13 +195,15 @@ def register_fonts(path: Union[str, PathLike[str]]):
                 italic=italic,
                 bold_italic=bold_italic,
             )
-        except ValidationError as err:
-            if client:
-                client.close()
-
-            raise BadFontException(
-                f"Invalid font family! Misconfigurations are listed below:\n" f"\n{err}"
-            ) from None
-
-    if client:
-        client.close()
+    except ValidationError as err:
+        raise BadFontException(
+            f"Invalid font family! Misconfigurations are listed below:\n" f"\n{err}"
+        ) from None
+    except HTTPError as err:
+        raise BadFontException(
+            "Failed to download the specified fonts from Google Fonts. Are you sure"
+            " they're available?"
+        ) from err
+    finally:
+        if client:
+            client.close()
