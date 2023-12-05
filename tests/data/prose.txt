@@ -1,0 +1,37 @@
+The deeply complex corporate structure of OpenAI makes it even difficult to know what we're referring to when we talk about 'OpenAI'.
+
+Usually a startup has one corporate entity that is organized and operated for profit, and the founders and investors have ownership (ie hold stock/shares) of that entity.
+
+Even at the level of a single corporate entity, the ownership of the corporate can get complicated very quickly because you can have different classes of shares, those shares can be voting or non-voting, they could be eligible for dividends or not, and you can write pretty much any shareholder's agreement you want, as long as nothing in the agreement is illegal.
+
+<i>But in 2023, the entire innovation funding model is in question.</i>
+
+<b>On the one hand, startup valuations became way too inflated in recent years, forcing a sometimes massive correction of those valuations downwards - perhaps WeWork is the best example of the froth and irrational exuberance that had developed.</b>
+
+On the other hand, it's crystal clear that the venture capital funding model is adequate only in specific cases of innovation, that is to say, a startup that:
+
+1. is going to grow fast enough for investors in early rounds to be in a position to pass the startup along to investors in later rounds, with an ever-increasing valuation
+
+2. is absolutely, definitely going to either be listed on public markets OR be acquired (sold) to a larger company
+
+In reality, your startup needs to get acquired, and in so many ways, the faster the better because the limited partners (LPs) who invest in venture capital firms, would rather see returns sooner than later.
+
+The result of this narrow use-case model for funding innovation almost entirely excludes long-term technical research, and because it's focused on speed, does a great job of excluding innovators who aren't already "in the game" due to their demographic and socio-economic origins.
+
+Simply put, if you're an under-represented founder or from an under-estimated community, it doesn't matter how much of a genius you are, you will have no chance at all because you're in the right place that has the right capital access.
+
+So, the entire investment community is looking for alternate models for funding innovation.
+
+OpenAI's artificially intelligenced chat bot, ChatGPT, is the fastest ever growing tech product. Partly it's because it's free, but mostly it's because it can be so helpful, particularly as a tool to assist people's *writing*.
+
+As innovative as the tech itself is, i would argue that the corporate structure of how the innovation was/is being funded, is the true revolution in this case. It's also evidently a gigantic inter-enmeshed mess of interests and incentives with no clear resolution in sight, but that is sort of the nature of innovation.
+
+I don't always agree with Patrick Boyle's ideological positioning, and the last third of the video i got this screenshot from, is a good example of what i defined as excessive cynicism of the kind that professional finance people always possess, mostly because they're so wealthy and don't really need to care about the future.
+
+https://www.youtube.com/watch?v=EjxxFvarg0Y
+
+However, his explanations are always very clear, and the ultra-dry biting humor is a plus.
+
+Personally, i think it's fascinating that the most rapidly successful tech product ever, was/is owned and controlled by a non-profit, which is to say for the benefit of the public.
+
+Or at least, that's how it started...

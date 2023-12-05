@@ -1,0 +1,12 @@
+[[fonts]]
+font_name = "EB Garamond"
+from_google_fonts = true
+
+[[fonts]]
+font_name = "Rubik Bubbles"
+from_google_fonts = true
+
+[[styles]]
+name = "default"
+font_size = 12
+font_name = "EB Garamond"

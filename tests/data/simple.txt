@@ -1,0 +1,11 @@
+This is normal.
+
+<i>This is italicized.</i>
+
+<b>This is bold.</b>
+
+<i><b>This is bold and italicized.</b></i>
+
+<u>This is underlined.</u>
+
+<strike>This is struck.</strike>
