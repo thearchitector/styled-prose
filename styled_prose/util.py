@@ -29,7 +29,7 @@
 import re
 
 
-def _get_valid_filename(name):
+def _get_valid_filename(name: str) -> str:
     """
     Return the given string converted to a string that can be used for a clean
     filename. Remove leading and trailing spaces; convert other spaces to

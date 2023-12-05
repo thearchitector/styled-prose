@@ -16,8 +16,7 @@ from .exceptions import BadFontException
 from .util import _get_valid_filename
 
 if TYPE_CHECKING:
-    from os import PathLike
-    from typing import Any, Dict, Set, Tuple, Union
+    from typing import Any, Dict, Set, Tuple
 
 CURRENT_VERSION: str = version("styled-prose")
 FONT_CACHE: Path = Path.home() / ".cache" / "styled_prose_fonts"
@@ -71,7 +70,7 @@ def _register_font_files(
     bold: Optional[Path] = None,
     italic: Optional[Path] = None,
     bold_italic: Optional[Path] = None,
-):
+) -> None:
     """Register the given font files, and combine them into a font family."""
     fonts: Dict[str, str] = {"normal": font_family}
 
@@ -117,11 +116,12 @@ def _download_font_family(
         with open(manifest_file, "r") as f:
             manifest = json.load(f)
 
+    file: Path
     for files in manifest["files"]:
         # write the all the bundled files, except the google readme, to the cache
         # this will include the license to the font
         if files["filename"] != "README.txt":
-            file: Path = font_dir / files["filename"]
+            file = font_dir / files["filename"]
             #  if the file is in the cache already, skip it
             if not file.exists():
                 file.write_text(files["contents"])
@@ -131,7 +131,7 @@ def _download_font_family(
         # the all ones we care about (ie. the ones RL can use)
         font_style: str = files["filename"].split("-")[-1][:-4].lower()
         if font_style in {"regular", "bold", "italic", "bolditalic"}:
-            file: Path = font_dir / f"{font_style}.ttf"
+            file = font_dir / f"{font_style}.ttf"
             if not file.exists():
                 # if the file doesn't exist, download it
                 file_resp: Response = client.get(files["url"])
@@ -146,7 +146,7 @@ def _download_font_family(
     )
 
 
-def register_fonts(path: Union[str, PathLike[str]]):
+def register_fonts(path: Path) -> None:
     config: Dict[str, Any] = load_config(path)
     c_path: Path = Path(path).parent
     client: Optional[Client] = None

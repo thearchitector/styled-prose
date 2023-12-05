@@ -8,14 +8,14 @@ from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
 from reportlab.lib.colors import HexColor
 from reportlab.lib.styles import ParagraphStyle as RLPStyle
 from reportlab.lib.styles import StyleSheet1 as StyleSheet
-from reportlab.rl_config import canvas_basefontname as base_font_name  # type: ignore
+from reportlab.rl_config import canvas_basefontname as base_font_name  # pyright: ignore
 from typing_extensions import TypedDict
 
 from .exceptions import BadStyleException
 
 if TYPE_CHECKING:
-    from os import PathLike
-    from typing import Any, Dict, Union
+    from pathlib import Path
+    from typing import Any, Dict
 
 from functools import lru_cache
 
@@ -130,7 +130,7 @@ class ParagraphStyle(BaseModel):
 
 
 @lru_cache(maxsize=None)
-def load_stylesheet(path: Union[str, PathLike[str]]) -> StyleSheet:
+def load_stylesheet(path: Path) -> StyleSheet:
     """
     Given a path to a TOML stylesheet definition, load the paragraph
     styles and construct a RL stylesheet to use when generating styled prose.
