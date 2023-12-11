@@ -1,5 +1,9 @@
-from .config import load_config
-from .exceptions import BadStyleException
-from .stylesheet import load_stylesheet
+from .creation import StyledProseGenerator
+from .exceptions import BadConfigException, BadFontException, BadStyleException
 
-__all__ = ["load_config", "load_stylesheet", "BadStyleException"]
+__all__ = [
+    "StyledProseGenerator",
+    "BadConfigException",
+    "BadFontException",
+    "BadStyleException",
+]

@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["cross_platform"]
 lock_version = "4.4"
-content_hash = "sha256:33ee6e6ae9f7c1d1be458eeebef890230a0f9c0ae22404f81275b2c22c8407ec"
+content_hash = "sha256:19237c4557268e9d739db16f644eb3fa9acddd295cbbcbb0a5d59139352c1256"
 
 [[package]]
 name = "annotated-types"
@@ -233,6 +233,18 @@ summary = "Core utilities for Python packages"
 files = [
     {file = "packaging-23.2-py3-none-any.whl", hash = "sha256:8c491190033a9af7e1d931d0b5dacc2ef47509b34dd0de67ed209b5203fc88c7"},
     {file = "packaging-23.2.tar.gz", hash = "sha256:048fb0e9405036518eaaf48a55953c750c11e1a1b68e0dd1a9d62ed0c092cfc5"},
+]
+
+[[package]]
+name = "pdf2image"
+version = "1.16.3"
+summary = "A wrapper around the pdftoppm and pdftocairo command line tools to convert PDF to a PIL Image list."
+dependencies = [
+    "pillow",
+]
+files = [
+    {file = "pdf2image-1.16.3-py3-none-any.whl", hash = "sha256:b6154164af3677211c22cbb38b2bd778b43aca02758e962fe1e231f6d3b0e380"},
+    {file = "pdf2image-1.16.3.tar.gz", hash = "sha256:74208810c2cef4d9e347769b8e62a52303982ddb4f2dfd744c7ab4b940ae287e"},
 ]
 
 [[package]]

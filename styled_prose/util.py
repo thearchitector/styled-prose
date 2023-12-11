@@ -28,15 +28,20 @@
 
 import re
 
+from pydantic import ValidationError
 
-def _get_valid_filename(name: str) -> str:
+
+def get_valid_filename(name: str) -> str:
     """
     Return the given string converted to a string that can be used for a clean
     filename. Remove leading and trailing spaces; convert other spaces to
     underscores; and remove anything that is not an alphanumeric, dash,
     underscore, or dot.
     """
-    s = str(name).strip().replace(" ", "_")
+    s: str = str(name).strip().replace(" ", "_")
     s = re.sub(r"(?u)[^-\w.]", "", s)
-    assert s not in {"", ".", ".."}
+
+    if s in {"", ".", ".."}:
+        raise ValidationError("Invalid font family name!")
+
     return s

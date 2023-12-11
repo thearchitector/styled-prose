@@ -13,7 +13,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 
 from .config import load_config
 from .exceptions import BadFontException
-from .util import _get_valid_filename
+from .util import get_valid_filename
 
 if TYPE_CHECKING:
     from typing import Any, Dict, Set, Tuple
@@ -96,7 +96,7 @@ def _download_font_family(
     Attempt to download the necessary TrueType font files for the provided font family
     from Google Fonts.
     """
-    font_dir: Path = FONT_CACHE / _get_valid_filename(font_family)
+    font_dir: Path = FONT_CACHE / get_valid_filename(font_family)
     font_dir.mkdir(parents=True, exist_ok=True)
 
     manifest_file: Path = font_dir / "manifest.json"
@@ -190,7 +190,7 @@ def register_fonts(path: Path) -> None:
 
             _register_font_files(
                 font_family.font_name,
-                normal,
+                normal,  # pyright: ignore
                 bold=bold,
                 italic=italic,
                 bold_italic=bold_italic,
