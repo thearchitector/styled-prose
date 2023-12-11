@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING
 from uuid import uuid4
 
 from pdf2image.pdf2image import convert_from_path
-from PIL import Image, ImageChops, ImageColor, ImageFilter
+from PIL import Image, ImageChops, ImageFilter
 from reportlab.lib.pagesizes import LETTER
 from reportlab.platypus import Paragraph, SimpleDocTemplate
 
@@ -18,7 +18,7 @@ from .stylesheet import load_stylesheet
 if TYPE_CHECKING:
     from typing import List, Optional, Tuple
 
-    from .stylesheet import StyleSheet
+    from reportlab.lib.styles import StyleSheet1 as StyleSheet
 
 
 class StyledProseGenerator:
@@ -86,7 +86,7 @@ class StyledProseGenerator:
         for page, im in enumerate(images):
             output.paste(im, (0, page * height))
 
-        white: Tuple[int, ...] = ImageColor.getrgb("white")
+        white: Tuple[int, int, int] = (255, 255, 255)
         if angle:
             # if an angle is supplied, rotate the image while expanding the dimensions
             # to accommodate

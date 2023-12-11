@@ -8,7 +8,7 @@ from .exceptions import BadConfigException
 try:
     import tomllib
 except ModuleNotFoundError:
-    import tomli as tomllib  # pyright: ignore
+    import tomli as tomllib  # type: ignore
 
 if TYPE_CHECKING:
     from pathlib import Path

@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["cross_platform"]
 lock_version = "4.4"
-content_hash = "sha256:19237c4557268e9d739db16f644eb3fa9acddd295cbbcbb0a5d59139352c1256"
+content_hash = "sha256:0530c0515f5f7a124b02ec21cc886d74e7edbbd5de00a8efa0fbe31c343201ab"
 
 [[package]]
 name = "annotated-types"
@@ -487,6 +487,16 @@ summary = "A lil' TOML parser"
 files = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
     {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
+]
+
+[[package]]
+name = "types-pillow"
+version = "10.1.0.2"
+requires_python = ">=3.7"
+summary = "Typing stubs for Pillow"
+files = [
+    {file = "types-Pillow-10.1.0.2.tar.gz", hash = "sha256:525c1c5ee67b0ac1721c40d2bc618226ef2123c347e527e14e05b920721a13b9"},
+    {file = "types_Pillow-10.1.0.2-py3-none-any.whl", hash = "sha256:131078ffa547bf9a201d39ffcdc65633e108148085f4f1b07d4647fcfec6e923"},
 ]
 
 [[package]]

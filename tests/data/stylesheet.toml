@@ -4,5 +4,5 @@ from_google_fonts = true
 
 [[styles]]
 name = "default"
-font_size = 12
+font_size = 14
 font_name = "EB Garamond"

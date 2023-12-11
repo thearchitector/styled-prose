@@ -25,10 +25,14 @@
 # ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+from __future__ import annotations
 
+import platform
 import re
+from typing import TYPE_CHECKING
 
-from pydantic import ValidationError
+if TYPE_CHECKING:
+    from typing import Set
 
 
 def get_valid_filename(name: str) -> str:
@@ -41,7 +45,18 @@ def get_valid_filename(name: str) -> str:
     s: str = str(name).strip().replace(" ", "_")
     s = re.sub(r"(?u)[^-\w.]", "", s)
 
-    if s in {"", ".", ".."}:
-        raise ValidationError("Invalid font family name!")
+    invalid: Set[str] = {"", ".", ".."}
+    if platform.system() == "Windows":
+        # windows has reserved filenames that we cannot allow
+        invalid.update(
+            {"CON", "PRN", "AUX", "NUL"},
+            {f"COM{i}" for i in range(1, 10)},
+            {f"LPT{i}" for i in range(1, 10)},
+        )
+
+    if s in invalid or s.endswith("."):
+        raise ValueError(
+            f"Unable to convert the provided font family name '{name}' into a filename."
+        )
 
     return s

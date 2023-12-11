@@ -12,3 +12,5 @@ dist
 *.pdf
 *.jpg
 !example.jpg
+
+test.py
