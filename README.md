@@ -1,5 +1,8 @@
 # styled-prose
 
+![GitHub Workflow Status](https://raster.shields.io/github/actions/workflow/status/thearchitector/styled-prose/ci.yaml?label=tests&style=flat-square)
+![PyPI - Downloads](https://raster.shields.io/pypi/dw/styled-prose?style=flat-square)
+
 Generate images and thumbnails based on bitmap transformations of rendered prose.
 
 ## Example
