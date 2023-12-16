@@ -49,3 +49,7 @@ img: Image.Image = generator.create_jpg(
 
 img.save("prose.jpg", quality=95)
 ```
+
+## License
+
+This software is licensed under the [3-Clause BSD License](LICENSE).

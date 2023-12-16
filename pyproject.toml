@@ -1,12 +1,12 @@
 [project]
 name = "styled-prose"
 version = "0.1.0"
-description = "Convert prose to images using discrete bitmap transformations."
+description = "Generate images and thumbnails based on bitmap transformations of rendered prose"
 authors = [
     {name = "thearchitector", email = "me@eliasfgabriel.com"},
 ]
 readme = "README.md"
-# license = {text = "MIT"}
+license = {text = "BSD-3-Clause"}
 
 requires-python = ">=3.8"
 dependencies = [
