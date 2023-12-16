@@ -9,8 +9,10 @@ __pycache__
 
 dist
 
+*.toml
 *.pdf
 *.jpg
-!example.jpg
+!simple.jpg
+!tgf.jpg
 
 test.py

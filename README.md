@@ -41,6 +41,7 @@ This is normal.
 
 <strike>This is struck from the record.</strike>
 """
+random.seed(771999)
 
 generator: StyledProseGenerator = StyledProseGenerator("stylesheet.toml")
 img: Image.Image = generator.create_jpg(
@@ -51,6 +52,10 @@ img: Image.Image = generator.create_jpg(
 
 img.save("prose.jpg", quality=95)
 ```
+
+This above code produces the following image:
+
+![example rendering](tests/data/simple.jpg)
 
 ## License
 
