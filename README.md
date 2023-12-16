@@ -7,7 +7,7 @@ Generate images and thumbnails based on bitmap transformations of rendered prose
 
 ## Example
 
-The following stylesheet is a super simple example that overrides the `default` style's font size and family. The font family `EB Garamond` is downloaded from Google Fonts and cached.
+The following stylesheet is a super simple example that overrides the `default` style's font size and family.
 
 ```toml
 # stylesheet.toml
@@ -22,7 +22,7 @@ font_size = 14
 font_name = "EB Garamond"
 ```
 
-With that stylesheet, and some basic prose, you can generate an image.
+Using that stylesheet, and some basic prose, you can generate an image. The requested font family `EB Garamond` and its license are downloaded from Google Fonts and cached automatically; subsequent generations use those cached fonts.
 
 ```python
 from PIL import Image
