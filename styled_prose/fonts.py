@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from functools import lru_cache
 from importlib.metadata import version
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional
@@ -101,8 +102,9 @@ def _download_font_family(
 
     manifest_file: Path = font_dir / "manifest.json"
     manifest: Dict[str, Any]
+
+    # if the font file manifest doesn't exist, download it
     if not manifest_file.exists():
-        # if the font file manifest doesn't exist, download it
         font_url: str = GOOGLE_FONTS_URL.format(quote_plus(font_family))
         resp: Response = client.get(font_url)
         resp.raise_for_status()
@@ -124,7 +126,7 @@ def _download_font_family(
             file = font_dir / files["filename"]
             #  if the file is in the cache already, skip it
             if not file.exists():
-                file.write_text(files["contents"])
+                file.write_text(files["contents"].replace("\r", ""))
 
     for files in manifest["fileRefs"]:
         # iterate through all the available fonts, downloading and caching
@@ -146,6 +148,7 @@ def _download_font_family(
     )
 
 
+@lru_cache(maxsize=None)
 def register_fonts(path: Path) -> None:
     config: Dict[str, Any] = load_config(path)
     c_path: Path = Path(path).parent

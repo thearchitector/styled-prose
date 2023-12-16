@@ -20,25 +20,7 @@ if TYPE_CHECKING:
 from functools import lru_cache
 
 from .config import load_config
-
-
-def _to_camel_case(field: str, parent: str = "", swap: bool = False) -> str:
-    """
-    Convert a given field to camel case, optionally prepending or appending a parent
-    namespace.
-
-    ex. 'camel_case'                    -> 'camelCase'
-    ex. ('color', parent='bullet')      -> 'bulletColor'
-    ex. ('left', parent='indent', True) -> 'leftIndent'
-    """
-    parts: list[str] = field.split("_")
-    if not parent:
-        parent, parts = parts[0], parts[1:]
-
-    if swap:
-        return "".join(part.title() for part in parts) + parent
-
-    return parent + "".join(part.title() for part in parts)
+from .util import to_camel_case
 
 
 class Indent(TypedDict):
@@ -108,7 +90,7 @@ class ParagraphStyle(BaseModel):
             # if a nested property, handle separately
             if isinstance(field, dict):
                 for f, val in value.items():
-                    properties[_to_camel_case(f, field, swap=(field == "indent"))] = val
+                    properties[to_camel_case(f, field, swap=(field == "indent"))] = val
                 continue
             # if a color, convert to a HexColor object
             elif "color" in field:
@@ -124,7 +106,7 @@ class ParagraphStyle(BaseModel):
                     # default single spaced
                     value = self.font_size * 1.15
 
-            properties[_to_camel_case(field)] = value
+            properties[to_camel_case(field)] = value
 
         return RLPStyle(**properties)
 
