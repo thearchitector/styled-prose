@@ -10,6 +10,8 @@ Generate images and thumbnails based on bitmap transformations of rendered prose
 The following stylesheet is a super simple example that overrides the `default` style's font size and family. The font family `EB Garamond` is downloaded from Google Fonts and cached.
 
 ```toml
+# stylesheet.toml
+
 [[fonts]]
 font_name = "EB Garamond"
 from_google_fonts = true
