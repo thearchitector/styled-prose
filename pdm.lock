@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["cross_platform"]
 lock_version = "4.4"
-content_hash = "sha256:0530c0515f5f7a124b02ec21cc886d74e7edbbd5de00a8efa0fbe31c343201ab"
+content_hash = "sha256:db5cc36cc2c9ad27f91e0ddce1d8fdb9e3cfbef895ed2368ac3c0f4b8fd8aa37"
 
 [[package]]
 name = "annotated-types"
@@ -43,6 +43,16 @@ summary = "Python package for providing Mozilla's CA Bundle."
 files = [
     {file = "certifi-2023.11.17-py3-none-any.whl", hash = "sha256:e036ab49d5b79556f99cfc2d9320b34cfbe5be05c5871b51de9329f0603b0474"},
     {file = "certifi-2023.11.17.tar.gz", hash = "sha256:9b469f3a900bf28dc19b8cfbf8019bf47f7fdd1a65a1d4ffb98fc14166beb4d1"},
+]
+
+[[package]]
+name = "chardet"
+version = "5.2.0"
+requires_python = ">=3.7"
+summary = "Universal encoding detector for Python 3"
+files = [
+    {file = "chardet-5.2.0-py3-none-any.whl", hash = "sha256:e1cf59446890a00105fe7b7912492ea04b6e6f06d4b742b2c788469e34c82970"},
+    {file = "chardet-5.2.0.tar.gz", hash = "sha256:1b3b6ff479a8c414bc3fa2c0852995695c4a026dcd6d0633b2dd092ca39c1cf7"},
 ]
 
 [[package]]
@@ -457,16 +467,43 @@ files = [
 ]
 
 [[package]]
+name = "pytest-mock"
+version = "3.12.0"
+requires_python = ">=3.8"
+summary = "Thin-wrapper around the mock package for easier use with pytest"
+dependencies = [
+    "pytest>=5.0",
+]
+files = [
+    {file = "pytest-mock-3.12.0.tar.gz", hash = "sha256:31a40f038c22cad32287bb43932054451ff5583ff094bca6f675df2f8bc1a6e9"},
+    {file = "pytest_mock-3.12.0-py3-none-any.whl", hash = "sha256:0972719a7263072da3a21c7f4773069bcc7486027d7e8e1f81d98a47e701bc4f"},
+]
+
+[[package]]
 name = "reportlab"
-version = "4.0.7"
+version = "4.0.8"
 requires_python = ">=3.7,<4"
 summary = "The Reportlab Toolkit"
 dependencies = [
+    "chardet",
     "pillow>=9.0.0",
 ]
 files = [
-    {file = "reportlab-4.0.7-py3-none-any.whl", hash = "sha256:956d5874ee56e88753cf4c49452d6a7fa54a64e049a0382bd0c0b2013a26ef9a"},
-    {file = "reportlab-4.0.7.tar.gz", hash = "sha256:967c77f00efd918cc231cf8b6d8f4e477dc973b5c16557e3bd18dfaeb5a70234"},
+    {file = "reportlab-4.0.8-py3-none-any.whl", hash = "sha256:d00693de8ab8761b122e409de883ba976c24839f93867090c0d40b5d5906e847"},
+    {file = "reportlab-4.0.8.tar.gz", hash = "sha256:169945817a1a7759fb7b7dae528c2f8064fc21d16338d9b572ebdcb756740853"},
+]
+
+[[package]]
+name = "respx"
+version = "0.20.2"
+requires_python = ">=3.7"
+summary = "A utility for mocking out the Python HTTPX and HTTP Core libraries."
+dependencies = [
+    "httpx>=0.21.0",
+]
+files = [
+    {file = "respx-0.20.2-py2.py3-none-any.whl", hash = "sha256:ab8e1cf6da28a5b2dd883ea617f8130f77f676736e6e9e4a25817ad116a172c9"},
+    {file = "respx-0.20.2.tar.gz", hash = "sha256:07cf4108b1c88b82010f67d3c831dae33a375c7b436e54d87737c7f9f99be643"},
 ]
 
 [[package]]

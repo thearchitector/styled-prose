@@ -1,8 +1,0 @@
-[[fonts]]
-font_name = "EB Garamond"
-from_google_fonts = true
-
-[[styles]]
-name = "default"
-font_size = 14
-font_name = "EB Garamond"

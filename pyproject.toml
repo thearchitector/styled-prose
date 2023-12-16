@@ -22,7 +22,9 @@ dependencies = [
 dev = [
     "pytest>=7.0.0",
     "mypy>=1.7.1",
-    "types-Pillow>=10.1.0"
+    "types-Pillow>=10.1.0",
+    "pytest-mock>=3.12.0",
+    "respx>=0.20.2",
 ]
 
 [tool.ruff]
@@ -32,6 +34,10 @@ extend-select = ["I", "B"]
 [tool.mypy]
 python_version = "3.8"
 strict = true
+
+[tool.pytest.ini_options]
+addopts = "-ra -svv"
+testpaths = ["tests"]
 
 [[tool.mypy.overrides]]
 module = ["reportlab.*", "tomllib.*"]

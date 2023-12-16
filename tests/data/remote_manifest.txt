@@ -1,0 +1,30 @@
+)]}'
+{
+  "zipName": "mock.zip",
+  "manifest": {
+    "files": [
+      {
+        "filename": "LICENSE.txt",
+        "contents": "Copyright 2023 Elias Gabriel"
+      }
+    ],
+    "fileRefs": [
+      {
+        "filename": "static/mock-Regular.ttf",
+        "url": "https://mock/regular.ttf"
+      },
+      {
+        "filename": "static/mock-Bold.ttf",
+        "url": "https://mock/bold.ttf"
+      },
+      {
+        "filename": "static/mock-Italic.ttf",
+        "url": "https://mock/italic.ttf"
+      },
+      {
+        "filename": "static/mock-BoldItalic.ttf",
+        "url": "https://mock/bold_italic.ttf"
+      }
+    ]
+  }
+}
