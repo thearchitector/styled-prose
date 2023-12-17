@@ -5,8 +5,27 @@ description = "Generate images and thumbnails based on bitmap transformations of
 authors = [
     {name = "thearchitector", email = "me@eliasfgabriel.com"},
 ]
-readme = "README.md"
 license = {text = "BSD-3-Clause"}
+readme = "README.md"
+keywords = [
+    "prose",
+    "text",
+    "writing",
+    "pdf",
+    "art",
+    "image",
+    "render",
+    "Pillow",
+    "pdf2image",
+    "TGF",
+    "The Glass Files"
+]
+
+[project.urls]
+homepage = "https://styledprose.thearchitector.dev"
+documentation = "https://styledprose.thearchitector.dev"
+changelog = "https://github.com/thearchitector/styled-prose/blob/main/CHANGELOG.md"
+repository = "https://github.com/thearchitector/styled-prose"
 
 requires-python = ">=3.8"
 dependencies = [
@@ -26,6 +45,9 @@ dev = [
     "pytest-mock>=3.12.0",
     "respx>=0.20.2",
 ]
+
+[tool.pdm.scripts]
+docs = "pdoc -o docs --no-search styled_proae"
 
 [tool.ruff]
 target-version = "py38"

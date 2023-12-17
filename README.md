@@ -2,8 +2,19 @@
 
 ![GitHub Workflow Status](https://raster.shields.io/github/actions/workflow/status/thearchitector/styled-prose/ci.yaml?label=tests&style=flat-square)
 ![PyPI - Downloads](https://raster.shields.io/pypi/dw/styled-prose?style=flat-square)
+![GitHub](https://img.shields.io/github/license/thearchitector/styled-prose?style=flat-square)
 
 Generate images and thumbnails based on bitmap transformations of rendered prose.
+
+Documentation: <https://styledprose.thearchitector.dev>.
+
+Tested support on Python 3.8, 3.9, 3.10, 3.11, and 3.12.
+
+```sh
+$ pdm add styled-prose
+# or
+$ pip install --user styled-prose
+```
 
 ## Example
 
