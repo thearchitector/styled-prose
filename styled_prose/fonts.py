@@ -12,7 +12,7 @@ from pydantic import BaseModel, ConfigDict, ValidationError, model_validator
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
-from .config import load_config
+from . import config as spconfig
 from .exceptions import BadFontException
 from .util import get_valid_filename
 
@@ -150,7 +150,7 @@ def _download_font_family(
 
 @lru_cache(maxsize=None)
 def register_fonts(path: Path) -> None:
-    config: Dict[str, Any] = load_config(path)
+    config: Dict[str, Any] = spconfig.load_config(path)
     c_path: Path = Path(path).parent
     client: Optional[Client] = None
 

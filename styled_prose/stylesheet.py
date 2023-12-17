@@ -8,8 +8,6 @@ from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
 from reportlab.lib.colors import HexColor
 from reportlab.lib.styles import ParagraphStyle as RLPStyle
 from reportlab.lib.styles import StyleSheet1 as StyleSheet
-from reportlab.rl_config import canvas_basefontname as base_font_name  # pyright: ignore
-from typing_extensions import TypedDict
 
 from .exceptions import BadStyleException
 
@@ -19,22 +17,21 @@ if TYPE_CHECKING:
 
 from functools import lru_cache
 
-from .config import load_config
+from . import config as spconfig
 from .util import to_camel_case
 
 
-class Indent(TypedDict):
-    left: int
-    right: int
-    first_line: int
+class Indent(BaseModel):
+    left: Optional[int] = 0
+    right: Optional[int] = 0
+    first_line: Optional[int] = 0
 
 
-class Bullet(TypedDict):
-    font_name: str
-    font_size: int
-    indent: int
-    anchor: Literal["start", "middle", "end"]
-    # color: str
+class Bullet(BaseModel):
+    font_name: Optional[str] = None
+    font_size: Optional[int] = None
+    indent: int = 0
+    anchor: Literal["start", "middle", "end"] = "start"
 
 
 class ParagraphStyle(BaseModel):
@@ -49,7 +46,7 @@ class ParagraphStyle(BaseModel):
     line_height: Optional[int] = None
     space_before: int = 0
     space_after: int = 0
-    indent: Indent = {"left": 0, "right": 0, "first_line": 0}
+    indent: Indent = Indent()
     alignment: Literal["left", "center", "right", "justify"] = "left"
 
     # viewport properties (wrapping)
@@ -60,12 +57,7 @@ class ParagraphStyle(BaseModel):
     allow_orphans: bool = True
 
     # list style
-    bullet: Bullet = {
-        "font_name": base_font_name,
-        "font_size": 12,
-        "indent": 0,
-        "anchor": "start",
-    }
+    bullet: Bullet = Bullet()
 
     model_config = ConfigDict(extra="forbid")
 
@@ -88,8 +80,14 @@ class ParagraphStyle(BaseModel):
         properties: Dict[str, Any] = {}
         for field, value in self.__dict__.items():
             # if a nested property, handle separately
-            if isinstance(field, dict):
-                for f, val in value.items():
+            if isinstance(value, BaseModel):
+                for f, val in vars(value).items():
+                    if field == "bullet" and not val:
+                        if f == "font_name":
+                            val = self.font_name
+                        elif f == "font_size":
+                            val = self.font_size
+
                     properties[to_camel_case(f, field, swap=(field == "indent"))] = val
                 continue
             # if a color, convert to a HexColor object
@@ -104,7 +102,7 @@ class ParagraphStyle(BaseModel):
                 field = "leading"
                 if not value:
                     # default single spaced
-                    value = self.font_size * 1.15
+                    value = round(self.font_size * 1.15)
 
             properties[to_camel_case(field)] = value
 
@@ -117,7 +115,7 @@ def load_stylesheet(path: Path) -> StyleSheet:
     Given a path to a TOML stylesheet definition, load the paragraph
     styles and construct a RL stylesheet to use when generating styled prose.
     """
-    config: Dict[str, Any] = load_config(path)
+    config: Dict[str, Any] = spconfig.load_config(path)
     stylesheet: StyleSheet = StyleSheet()
 
     for style in config.get("styles", []):

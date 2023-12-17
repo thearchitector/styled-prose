@@ -33,8 +33,9 @@ def clear_cache():
         "extra-property",
     ),
 )
-def test_register_fonts_invalid(monkeypatch, config, exception):
-    monkeypatch.setattr("styled_prose.fonts.load_config", lambda _: {"fonts": [config]})
+def test_register_fonts_invalid(mock_config, config, exception):
+    # mock loaded config
+    mock_config({"fonts": [config]})
 
     with pytest.raises(Exception, match=exception):
         register_fonts("mock.toml")
@@ -64,12 +65,9 @@ def test_register_fonts_invalid(monkeypatch, config, exception):
         "regular-bold-italics-both",
     ),
 )
-def test_register_fonts_local(monkeypatch, fonts, mocker):
+def test_register_fonts_local(mock_config, monkeypatch, fonts, mocker):
     # mock loaded config
-    monkeypatch.setattr(
-        "styled_prose.fonts.load_config",
-        lambda _: {"fonts": [dict(font_name="mock", **fonts)]},
-    )
+    mock_config({"fonts": [dict(font_name="mock", **fonts)]})
 
     # mock font registration
     monkeypatch.setattr("pathlib.Path.exists", lambda _: True)
@@ -94,11 +92,11 @@ def test_register_fonts_local(monkeypatch, fonts, mocker):
     )
 
 
-def test_register_fonts_remote(monkeypatch, tmp_path, mocker, respx_mock, data_dir):
-    monkeypatch.setattr(
-        "styled_prose.fonts.load_config",
-        lambda _: {"fonts": [{"font_name": "mock", "from_google_fonts": True}]},
-    )
+def test_register_fonts_remote(
+    mock_config, monkeypatch, tmp_path, mocker, respx_mock, data_dir
+):
+    # mock loaded config
+    mock_config({"fonts": [{"font_name": "mock", "from_google_fonts": True}]})
 
     # mock font downloads
     monkeypatch.setattr("styled_prose.fonts.FONT_CACHE", tmp_path)

@@ -67,15 +67,15 @@ def to_camel_case(field: str, parent: str = "", swap: bool = False) -> str:
     Convert a given field to camel case, optionally prepending or appending a parent
     namespace.
 
-    ex. 'camel_case'                    -> 'camelCase'
-    ex. ('color', parent='bullet')      -> 'bulletColor'
-    ex. ('left', parent='indent', True) -> 'leftIndent'
+    ex. 'camel_case'                         -> 'camelCase'
+    ex. ('color', parent='bullet')           -> 'bulletColor'
+    ex. ('left', parent='indent', swap=True) -> 'leftIndent'
     """
     parts: list[str] = field.split("_")
     if not parent:
         parent, parts = parts[0], parts[1:]
 
     if swap:
-        return "".join(part.title() for part in parts) + parent
+        parent, parts = parts[0], (parts[1:] + [parent])
 
     return parent + "".join(part.title() for part in parts)
