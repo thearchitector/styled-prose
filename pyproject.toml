@@ -21,12 +21,6 @@ keywords = [
     "The Glass Files"
 ]
 
-[project.urls]
-homepage = "https://styledprose.thearchitector.dev"
-documentation = "https://styledprose.thearchitector.dev"
-changelog = "https://github.com/thearchitector/styled-prose/blob/main/CHANGELOG.md"
-repository = "https://github.com/thearchitector/styled-prose"
-
 requires-python = ">=3.8"
 dependencies = [
     "reportlab>=4.0.0",
@@ -36,6 +30,12 @@ dependencies = [
     "pdf2image>=1.16.3",
     "Pillow>=10.1.0",
 ]
+
+[project.urls]
+homepage = "https://styledprose.thearchitector.dev"
+documentation = "https://styledprose.thearchitector.dev"
+changelog = "https://github.com/thearchitector/styled-prose/blob/main/CHANGELOG.md"
+repository = "https://github.com/thearchitector/styled-prose"
 
 [tool.pdm.dev-dependencies]
 dev = [
