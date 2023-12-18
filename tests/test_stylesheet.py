@@ -75,7 +75,7 @@ def clear_cache():
                 "name": "default",
                 "font_color": "#ff00ff",
                 "alignment": "justify",
-                "word_wrap": "rtl",
+                "text_direction": "rtl",
                 "line_height": 20,
             },
             RLPStyle(

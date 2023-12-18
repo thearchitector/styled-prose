@@ -156,7 +156,8 @@ class ParagraphStyle(BaseModel):
             # if an alignment, convert to the proper integer literal
             elif field == "alignment":
                 value = getattr(RLEnums, f"TA_{value.upper()}")
-            elif field == "word_wrap" and value:
+            elif field == "text_direction" and value:
+                field = "word_wrap"
                 value = value.upper()
             elif field == "line_height":
                 field = "leading"
