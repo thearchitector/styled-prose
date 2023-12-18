@@ -1,6 +1,6 @@
 [project]
 name = "styled-prose"
-version = "0.1.0"
+version = "1.0.0"
 description = "Generate images and thumbnails based on bitmap transformations of rendered prose"
 authors = [
     {name = "thearchitector", email = "me@eliasfgabriel.com"},
