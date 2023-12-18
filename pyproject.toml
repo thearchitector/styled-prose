@@ -12,13 +12,15 @@ keywords = [
     "text",
     "writing",
     "pdf",
+    "typography",
+    "fonts",
     "art",
     "image",
     "render",
-    "Pillow",
+    "pillow",
     "pdf2image",
-    "TGF",
-    "The Glass Files"
+    "tgf",
+    "the-glass-files"
 ]
 
 requires-python = ">=3.8"
@@ -44,10 +46,11 @@ dev = [
     "types-Pillow>=10.1.0",
     "pytest-mock>=3.12.0",
     "respx>=0.20.2",
+    "pdoc>=14.2.0",
 ]
 
 [tool.pdm.scripts]
-docs = "pdoc -o docs --no-search styled_proae"
+docs = "pdoc -t templates -o docs --no-search --no-show-source --no-include-undocumented styled_prose"
 
 [tool.ruff]
 target-version = "py38"

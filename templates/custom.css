@@ -1,0 +1,6 @@
+img[src="simple.jpg"] {
+  border: 1px solid black;
+  display: block;
+  margin: 0 auto;
+  padding: 0.25em;
+}

@@ -22,6 +22,13 @@ if TYPE_CHECKING:
 
 
 class StyledProseGenerator:
+    """
+    A styled prose generator, configured using the provided configuration stylesheet.
+    Font and style validation and registration happens during initialization; as such,
+    if using this library as a part of an application, it is recommended to create a
+    single instance of this class during startup.
+    """
+
     def __init__(self, config: Path) -> None:
         register_fonts(config)
         self.stylesheet: StyleSheet = load_stylesheet(config)
@@ -36,16 +43,20 @@ class StyledProseGenerator:
         comparative_font_size: float = 6.0,
     ) -> Image.Image:
         """
-        Converts the provided prose into an stylized image. If provided a style, that
-        style is used when configuring and producing the rendered prose. If an angle is
-        provided, that angle is applied to the stylized prose after generation. If
-        thumbnail dimensions are provided, the image is cropped after the previous
-        steps.
+        Converts the provided prose into an stylized image.
 
-        `prescale_thumbnail` and `comparative_font_size` control the thumbnail cropping
-        behavior; if enabled, to aesthetically accommodate various font sizes, a
-        scaled initial thumbnail area is captured as to match the density of text in
-        the same area if the prose were rendered using the provided
+        If provided a style, that style is used when configuring and producing the
+        rendered prose.
+
+        If an angle is provided, that angle is applied to the stylized prose rendering.
+
+        If thumbnail dimensions are provided, the rendering is cropped after the
+        previous steps.
+
+        The `prescale_thumbnail` and `comparative_font_size` parameters control the
+        thumbnail cropping behavior; if enabled, to aesthetically accommodate various
+        font sizes, a scaled initial thumbnail area is captured as to match the density
+        of text in the same area if the prose were rendered using the provided
         `comparative_font_size`. The defaults produce a thumbnail with a text density
         similar to 6pt EB Garamond text inside a 210x210 square. The intermediate
         thumbnail is always scaled to the requested thumbnail dimensions using the

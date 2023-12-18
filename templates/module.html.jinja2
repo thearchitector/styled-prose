@@ -1,0 +1,8 @@
+{% extends "default/module.html.jinja2" %}
+{% block module_info %}
+    <section class="module-info">
+        {{ docstring(module).replace("/docs/", "") }}
+    </section>
+{% endblock %}
+
+{% defaultmacro inherited(cls) %}{% enddefaultmacro %}

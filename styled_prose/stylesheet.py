@@ -35,26 +35,86 @@ class Bullet(BaseModel):
 
 
 class ParagraphStyle(BaseModel):
+    """
+    Every property within this class changes the formatting and subsequent rendering
+    of any prose using the style.
+
+    For example, the following changes the default font size to 14 and the font
+    family to "EB Garamond". To register custom fonts, like "EB Garamond", see
+    `FontFamily`.
+
+    ```toml
+    [[styles]]
+    name = "default"
+    font_size = 14
+    font_name = "EB Garamond"
+    ```
+    Multiple styles are supported through multiple `[[styles]]` definitions.
+    """
+
     name: str
+    """
+    The name of the style. It must be unique, and can be referenced from
+    `StyledProseGenerator.create_jpg`.
+    """
 
     # global font properties
     font_name: str = "Times"
+    """
+    The font family this style should use to render prose. "Times" (the default),
+    "Helvetica" / "Arial", and "Courier" are bundeled and available. You can supply
+    your own fonts via the `[[fonts]]` section of your stylesheet; see `FontFamily`.
+    """
     font_size: int = 12
+    """ The font size. It is 12pt by default."""
     font_color: str = "#000000"
+    """
+    The color of your prose in hexademical format ("#RRGGBB"). By default, this is
+    black ("#000000").
+    """
 
     # spacing properties
     line_height: Optional[int] = None
+    """
+    The desired line height. This value should be provided in absolute font size
+    points; by default, it will be 115% of the provided font size (single spaced).
+    """
     space_before: int = 0
     space_after: int = 0
     indent: Indent = Indent()
     alignment: Literal["left", "center", "right", "justify"] = "left"
+    """
+    The justification of rendered prose. By default, all text will be left-justified. It
+    can be any one of "left", "center", "right", or "justify".
+    """
 
     # viewport properties (wrapping)
-    word_wrap: Optional[Literal["cjk", "ltr", "rtl"]] = "ltr"
+    text_direction: Optional[Literal["cjk", "ltr", "rtl"]] = "ltr"
+    """
+    Controls the text direction. By default it is "ltr" (left to right), but can
+    also be "rtl" (right to left) and "cjk" (Chinese, Japanese, or Korean).
+    """
     split_long_words: bool = False
+    """
+    Dictates if long words can be split in order to more compactly wrap text. By
+    default, long words will begin a new line instead of being split.
+    """
+
     ## https://en.wikipedia.org/wiki/Widows_and_orphans
     allow_widows: bool = True
+    """
+    Determines if widows are allowed; a widow is a line of text carried over to a new
+    page because it doesn't fit on the previous.
+
+    <https://en.wikipedia.org/wiki/Widows_and_orphans>
+    """
     allow_orphans: bool = True
+    """
+    Determines if orphans are allowed; an orphan is the last word of a sentence that is
+    too long to fit on the same line. If this docstring were to extend the entire width of this paragraph, the last word would be an<br />orphan.
+
+    <https://en.wikipedia.org/wiki/Widows_and_orphans>
+    """
 
     # list style
     bullet: Bullet = Bullet()
@@ -63,7 +123,7 @@ class ParagraphStyle(BaseModel):
 
     @field_validator("font_color")
     @classmethod
-    def check_is_color(cls, value: str) -> str:
+    def _check_is_color(cls, value: str) -> str:
         if value[0] != "#" or any(c not in string.hexdigits for c in value[1:]):
             raise ValueError(
                 "Colors must begin with '#' and be a valid 6-character hex string!"
@@ -71,7 +131,7 @@ class ParagraphStyle(BaseModel):
 
         return value
 
-    def to_reportlab(self) -> RLPStyle:
+    def _to_reportlab(self) -> RLPStyle:
         """
         Convert this configured paragraph style into one supported by ReportLab. We
         have to manually convert some properties that are exposed differently for
@@ -129,7 +189,7 @@ def load_stylesheet(path: Path) -> StyleSheet:
         # try to coerce the style to the proper format, adding it if successful
         try:
             ps: ParagraphStyle = ParagraphStyle(name=name, **style)
-            stylesheet.add(ps.to_reportlab())
+            stylesheet.add(ps._to_reportlab())
         except ValidationError as err:
             raise BadStyleException(
                 f"Invalid paragraph style {name}! Misconfigurations are listed below:\n"
@@ -138,6 +198,6 @@ def load_stylesheet(path: Path) -> StyleSheet:
 
     # add the default style is not overridden
     if "default" not in stylesheet:
-        stylesheet.add(ParagraphStyle(name="default").to_reportlab())
+        stylesheet.add(ParagraphStyle(name="default")._to_reportlab())
 
     return stylesheet

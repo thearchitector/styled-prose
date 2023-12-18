@@ -2,7 +2,7 @@
 
 ![GitHub Workflow Status](https://raster.shields.io/github/actions/workflow/status/thearchitector/styled-prose/ci.yaml?label=tests&style=flat-square)
 ![PyPI - Downloads](https://raster.shields.io/pypi/dw/styled-prose?style=flat-square)
-![GitHub](https://img.shields.io/github/license/thearchitector/styled-prose?style=flat-square)
+![GitHub](https://raster.shields.io/github/license/thearchitector/styled-prose?style=flat-square)
 
 Generate images and thumbnails based on bitmap transformations of rendered prose.
 
@@ -66,8 +66,4 @@ img.save("prose.jpg", quality=95)
 
 This above code produces the following image:
 
-![example rendering](tests/data/simple.jpg)
-
-## License
-
-This software is licensed under the [3-Clause BSD License](LICENSE).
+![example rendering](/docs/simple.jpg)
